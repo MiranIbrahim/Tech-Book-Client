@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../Hooks/UseAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
+  const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -12,9 +19,57 @@ const Register = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          const newUser = {
+            email: data.email,
+            name: data.name,
+          };
+          axiosPublic.post("/users", newUser).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Registration Completed",
+                showClass: {
+                  popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `,
+                },
+                hideClass: {
+                  popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `,
+                },
+              });
+              reset();
+              navigate("/");
+            }
+          });
+        })
+        .catch((error) => console.log(error));
+    });
   };
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+    .then(result => {
+      const user = result.user;
+      const newUser = {
+        email: user.email,
+        name: user.displayName,
+      }
+      axiosPublic.post('/users', newUser)
+      .then(res => {
+        console.log(res.data);
+        navigate('/');
+      })
+    })
+  };
   return (
     <div className="flex justify-center items-center bg-gradient-to-r from-blue-400 via-black-200 via-blue-300 to-blue-500">
       <div className="w-full max-w-md bg-black bg-opacity-30 bg-blend-screen py-8 px-10 mt-20 rounded-lg my-10">
@@ -26,9 +81,16 @@ const Register = () => {
             <input
               type="text"
               name="photoURL"
-              placeholder="Photo URL"
+              placeholder="Paste your photoURL *"
               className="w-full border border-gray-300 rounded-md px-4 py-2"
+              {...register("photoURL", {
+                required: "photoURL is required",
+              })}
+              aria-invalid={errors.name ? "true" : "false"}
             />
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message}</p>
+            )}
           </div>
           <div className="mb-6">
             <input
