@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+
 import logo from '../assets/Icon/logo.png'
 import {FaFacebook, FaGithub, FaYoutube} from 'react-icons/fa'
 const Footer = () => {
     return (
       <div>
-        <footer className="footer p-10 bg-slate-500 text-neutral-content">
+        <footer className="footer p-10 bg-black text-neutral-content">
           <aside>
             <img src={logo}></img>
             <p>

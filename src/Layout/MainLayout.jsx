@@ -7,7 +7,7 @@ const MainLayout = () => {
   console.log(location);
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div>
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
