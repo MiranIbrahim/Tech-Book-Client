@@ -1,7 +1,7 @@
 [
     {
       "productName": "Ultra HD Smart TV",
-      "image": "ultra_hd_tv.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0MihjgyXd5Zcz0YZmbXGzCB95MB0l8pQOycI8YEopLNrljd8FG45bWaOCeVZF5ncOKns&usqp=CAU",
       "description": "Experience stunning visuals with our latest Ultra HD Smart TV.",
       "tags": ["television", "smart", "electronics"],
       "externalLinks": ["https://example.com/ultra_hd_tv"],
@@ -13,7 +13,7 @@
     },
     {
       "productName": "Wireless Noise-Canceling Headphones",
-      "image": "wireless_headphones.jpg",
+      "image": "https://www.energysistem.com/cdnassets/products/45305/principal_2000.jpg",
       "description": "Immerse yourself in high-quality sound with these wireless noise-canceling headphones.",
       "tags": ["headphones", "audio", "wireless"],
       "externalLinks": ["https://example.com/wireless_headphones"],
@@ -25,7 +25,7 @@
     },
     {
       "productName": "Gaming Laptop Pro",
-      "image": "gaming_laptop.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ3e6_ENViWEGFxCmKFP5jL1Vu81MURjnJ5g&usqp=CAU",
       "description": "Dominate your gaming sessions with our powerful Gaming Laptop Pro.",
       "tags": ["gaming", "laptop", "technology"],
       "externalLinks": ["https://example.com/gaming_laptop"],
@@ -37,7 +37,7 @@
     },
     {
       "productName": "Smart Home Security System",
-      "image": "security_system.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvvLx4N5gmGxQvYMi5lXyWZv6HM-RlqcXk_Q&usqp=CAU",
       "description": "Keep your home secure with our advanced Smart Home Security System.",
       "tags": ["security", "smart home", "technology"],
       "externalLinks": ["https://example.com/security_system"],
@@ -49,7 +49,7 @@
     },
     {
       "productName": "Compact Drone",
-      "image": "compact_drone.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYuI3JOwEPmeuwJbjwD9FzhubudvI1RRqTgQ&usqp=CAU",
       "description": "Capture breathtaking aerial shots with our compact drone.",
       "tags": ["drone", "photography", "technology"],
       "externalLinks": ["https://example.com/compact_drone"],
@@ -61,7 +61,7 @@
     },
     {
       "productName": "Smart Thermostat",
-      "image": "smart_thermostat.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXFulORluJowvfJ6F7agGV1VmErS5O_WOSlg&usqp=CAU",
       "description": "Efficiently manage your home's temperature with our Smart Thermostat.",
       "tags": ["thermostat", "smart home", "technology"],
       "externalLinks": ["https://example.com/smart_thermostat"],
@@ -73,7 +73,7 @@
     },
     {
       "productName": "High-Performance Graphics Card",
-      "image": "graphics_card.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDf-TAGPpGj_VjZ3484gS7eiSV1KWqtPPwA&usqp=CAU",
       "description": "Upgrade your gaming experience with our high-performance graphics card.",
       "tags": ["graphics card", "gaming", "technology"],
       "externalLinks": ["https://example.com/graphics_card"],
@@ -85,7 +85,7 @@
     },
     {
       "productName": "Smart Refrigerator",
-      "image": "smart_refrigerator.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh2MfmCoX1QxBrVCeAmjFcDjDS2PanGuVNzQ&usqp=CAU",
       "description": "A refrigerator that adapts to your needs with smart technology.",
       "tags": ["refrigerator", "smart home", "appliances"],
       "externalLinks": ["https://example.com/smart_refrigerator"],
@@ -97,7 +97,7 @@
     },
     {
       "productName": "Ultra-Thin Laptop",
-      "image": "ultra_thin_laptop.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ3e6_ENViWEGFxCmKFP5jL1Vu81MURjnJ5g&usqp=CA",
       "description": "Experience portability without compromise with our ultra-thin laptop.",
       "tags": ["laptop", "ultra-thin", "technology"],
       "externalLinks": ["https://example.com/ultra_thin_laptop"],
@@ -109,7 +109,7 @@
     },
     {
       "productName": "Fitness Tracker",
-      "image": "fitness_tracker.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHk5ywrwMsiWqJRF1jhj4G39oaPnq_q-Unvw&usqp=CAU",
       "description": "Achieve your fitness goals with our advanced fitness tracker.",
       "tags": ["fitness", "wearable", "technology"],
       "externalLinks": ["https://example.com/fitness_tracker"],

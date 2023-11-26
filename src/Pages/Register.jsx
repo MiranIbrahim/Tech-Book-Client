@@ -17,7 +17,7 @@ const Register = () => {
   const handleGoogleSignIn = () => {};
   return (
     <div className="flex justify-center items-center bg-gradient-to-r from-blue-400 via-black-200 via-blue-300 to-blue-500">
-      <div className="w-full max-w-md bg-black bg-opacity-30 bg-blend-screen py-8 px-10 mt-20 rounded-lg">
+      <div className="w-full max-w-md bg-black bg-opacity-30 bg-blend-screen py-8 px-10 mt-20 rounded-lg my-10">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <h1 className="text-4xl font-bold text-center">REGISTER</h1>
