@@ -4,6 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import useProducts from "../../Hooks/useProducts";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyProducts = () => {
   const { user, loading } = useContext(AuthContext);
@@ -63,7 +64,7 @@ const MyProducts = () => {
             <td>{item.status}</td>
             <td>{item.upvoteCount}</td>
             <td>
-                <button className="btn btn-info">Update</button>
+            <Link to={`/dashboard/updateProduct/${item._id}`}><button className="btn btn-info">Update</button></Link>
             </td>
             <td>
             <button onClick={()=>handleDelete(item)} className="btn btn-warning">Delete</button>
