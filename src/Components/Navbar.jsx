@@ -69,11 +69,11 @@ const Navbar = () => {
               </div>
             </div>
             <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content  rounded-box w-52 text-slate-600 bg-base-200">
-              <li>
+              <li className="text-center text-blue-600">
                 {user.displayName}
               </li>
               <li>
-                {user.email}
+              <Link to='/dashboard'>Dashboard</Link>
               </li>
               <li>
                 <button onClick={handleLogOut} className="">
