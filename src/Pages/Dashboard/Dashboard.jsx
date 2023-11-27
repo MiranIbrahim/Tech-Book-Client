@@ -15,9 +15,9 @@ const Dashboard = () => {
   const isUser = true;
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       {/* dashboard side bar */}
-      <div className="w-1/4 min-h-screen bg-blue-300 font-semibold">
+      <div className="w-full md:w-1/4 md:min-h-screen bg-blue-300 font-semibold">
         <ul className="menu p-4 text-lg">
           {/* ------------------User routes ----------------- */}
           {isUser && (
@@ -68,7 +68,7 @@ const Dashboard = () => {
             </>
           )}
 
-          
+
           {/* ------------------Moderator routes ----------------- */}
           {isModerator && (
             <>

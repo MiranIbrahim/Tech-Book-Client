@@ -3,7 +3,10 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { MdOutlineVerified } from "react-icons/md";
 
 const UserProfile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+  if (loading) {
+    return <progress className="progress w-56"></progress>;
+  }
   const isSubscribed = false;
   return (
     <div className="p-5 flex">
