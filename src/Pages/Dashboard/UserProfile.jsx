@@ -9,25 +9,32 @@ const UserProfile = () => {
   }
   const isSubscribed = false;
   return (
-    <div className="p-5 flex">
-      <div>
+    <div>
+      <h2 className="text-3xl text-center font-semibold">My Profile</h2>
+      <div className="p-5 flex">
         <div>
-          <img className="w-32 h-32 rounded-full" src={user.photoURL} alt="" />
-        </div>
-        <p>Name : {user.displayName}</p>
-        <p>Email ID : {user.email}</p>
-      </div>
-      <div>
-        {isSubscribed ? (
-          <div className="badge badge-primary badge-outline">
-            <MdOutlineVerified />
-            Verified
+          <div>
+            <img
+              className="w-32 h-32 rounded-full"
+              src={user.photoURL}
+              alt=""
+            />
           </div>
-        ) : (
-          <>
-            <button className="btn btn-primary">pay $20 to subscribe </button>
-          </>
-        )}
+          <p>Name : {user.displayName}</p>
+          <p>Email ID : {user.email}</p>
+        </div>
+        <div>
+          {isSubscribed ? (
+            <div className="badge badge-primary badge-outline">
+              <MdOutlineVerified />
+              Verified
+            </div>
+          ) : (
+            <>
+              <button className="btn btn-primary">pay $20 to subscribe </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

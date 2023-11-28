@@ -49,6 +49,7 @@ const ManageUsers = () => {
   return (
     <div>
       <div className="ml-5">
+      <h2 className="text-3xl text-center font-semibold">User Management</h2>
         <h2 className="text-3xl">Total users: {users.length}</h2>
         <div className="overflow-x-auto">
           <table className="table table-zebra-zebra w-full">
@@ -92,28 +93,28 @@ const ManageUsers = () => {
                   <td className="grid lg:grid-cols-2 gap-2">
                     <button
                       onClick={() => handleRole(user, "admin")}
-                      className="btn btn-xs px-8 bg-red-600 text-white"
+                      className="btn btn-xs pb-5 pt-2 px-8 bg-red-600 text-white"
                       disabled={user.role === 'admin'}
                     >
                       Admin
                     </button>
                     <button
                       onClick={() => handleRole(user, "moderator")}
-                      className="btn btn-xs px-8 bg-yellow-600 text-white"
+                      className="btn btn-xs pb-5 pt-2 px-8 bg-yellow-600 text-white"
                       disabled={user.role === 'moderator'}
                     >
                       Moderator
                     </button>
                     <button
                       onClick={() => handleRole(user, "subscribed")}
-                      className="btn btn-xs px-8 text-white bg-green-600"
+                      className="btn btn-xs pb-5 pt-2 px-8 text-white bg-green-600"
                       disabled={user.role === 'subscribed'}
                     >
                       Subscribed
                     </button>
                     <button
                       onClick={() => handleRole(user, "unsubscribed")}
-                      className="btn btn-xs px-8 text-white bg-blue-500"
+                      className="btn btn-xs pb-5 pt-2 px-8 text-white bg-blue-500"
                       disabled={user.role === 'unsubscribed'}
                     >
                       Unsubscribed

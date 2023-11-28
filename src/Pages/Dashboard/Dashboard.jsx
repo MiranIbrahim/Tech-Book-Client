@@ -8,11 +8,27 @@ import { MdOutlineReviews } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { IoStatsChart } from "react-icons/io5";
 import { RiCoupon3Line } from "react-icons/ri";
+import useProducts from "../../Hooks/useProducts";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import LoadingCircle from "../../Components/LoadingCircle";
+
+
+
 
 const Dashboard = () => {
-  const isAdmin = true;
-  const isModerator = false;
-  const isUser = false;
+  const { user } = useContext(AuthContext);
+  if(!user){
+    return (<LoadingCircle></LoadingCircle>);
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [dbUser] = useProducts({
+      api: `/users/${user?.email}`,
+      key: 'userRole',
+    });
+  console.log(dbUser.role);
+  const role = 'moderator';
+  // const role = dbUser.role;
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -20,7 +36,7 @@ const Dashboard = () => {
       <div className="w-full md:w-1/4 md:min-h-screen bg-blue-300 font-semibold">
         <ul className="menu p-4 text-lg">
           {/* ------------------User routes ----------------- */}
-          {isUser && (
+          {(role === 'subscribed' || role === 'unsubscribed') && (
             <>
               <li className="">
                 <NavLink to="/dashboard/userProfile">
@@ -45,7 +61,7 @@ const Dashboard = () => {
 
 
           {/* ------------------Admin routes ----------------- */}
-          {isAdmin && (
+          {role === 'admin' && (
             <>
               <li className="">
                 <NavLink to="/dashboard/statistics">
@@ -70,12 +86,12 @@ const Dashboard = () => {
 
 
           {/* ------------------Moderator routes ----------------- */}
-          {isModerator && (
+          {role === 'moderator' && (
             <>
               <li className="">
                 <NavLink to="/dashboard/productReviewQueue">
                   <MdOutlineReviews />
-                  Product Review Queue
+                  Product Queue
                 </NavLink>
               </li>
               <li>
