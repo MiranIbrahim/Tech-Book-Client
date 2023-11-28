@@ -9,6 +9,7 @@ const Products = () => {
   const key = "products";
   // eslint-disable-next-line no-unused-vars
   const [products, loading, refetch] = useProducts({ api, key });
+  const acceptedProducts = products.filter(item => item.status === 'accepted');
 
 
   return (
@@ -16,7 +17,7 @@ const Products = () => {
       <h2 className="my-10 text-3xl text-center ">All Products</h2>
 
       <div className="md:grid grid-cols-4 gap-4">
-        {products.map((item) => (
+        {acceptedProducts.map((item) => (
           <div key={item._id} className="card bg-base-100 border">
             <figure className="px-10 pt-10">
               <img src={item.image} alt="" className="rounded-xl" />

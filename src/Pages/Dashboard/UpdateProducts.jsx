@@ -156,7 +156,7 @@ const UpdateProducts = () => {
           </div>
 
           <button type="submit" className="btn">
-            Add Product <FaUpload className="ml-4" />
+            Update Product <FaUpload className="ml-4" />
           </button>
         </form>
       </div>

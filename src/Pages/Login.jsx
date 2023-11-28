@@ -68,7 +68,7 @@ const Login = () => {
             type="submit"
             className="bg-red-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
           >
-            Sign Up
+            Log in
           </button>
         </form>
         <h2 className="text-lg text-white mt-3 font-semibold">New to this site? Please <Link className="text-lime-300 underline" to='/register' >Sign Up</Link> </h2>

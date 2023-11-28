@@ -15,6 +15,7 @@ import UserProfile from "../Pages/Dashboard/UserProfile";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import MyProducts from "../Pages/Dashboard/MyProducts";
 import UpdateProducts from "../Pages/Dashboard/UpdateProducts";
+import ManageUsers from "../Pages/Dashboard/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -59,7 +60,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard/manageUsers',
-        element: <Statistics></Statistics>
+        element: <ManageUsers></ManageUsers>
     },
     {
         path: '/dashboard/manageCoupons',

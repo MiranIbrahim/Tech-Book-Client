@@ -3,14 +3,17 @@ import NavLogo from "../assets/Icon/NavLogo.png";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import LoadingCircle from "./LoadingCircle";
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((error) => console.log(error));
   };
-
+    if(loading){
+        return (<LoadingCircle></LoadingCircle>);
+      }
   const navItems = (
     <>
       <li>
@@ -32,6 +35,11 @@ const Navbar = () => {
       )}
     </>
   );
+  if(loading){
+    return (<div className="flex items-center justify-center ">
+    <div className="w-40 h-40 border-t-4 border-b-4 border-green-900 rounded-full animate-spin"></div>
+</div>);
+  }
   return (
     <div className="navbar fixed z-10 max-w-screen-xl bg-black bg-opacity-30 text-white">
       <div className="navbar-start">
@@ -73,7 +81,7 @@ const Navbar = () => {
                 {user.displayName}
               </li>
               <li>
-              <Link to='/dashboard'>Dashboard</Link>
+              <Link to='/dashboard/userProfile'>Dashboard</Link>
               </li>
               <li>
                 <button onClick={handleLogOut} className="">

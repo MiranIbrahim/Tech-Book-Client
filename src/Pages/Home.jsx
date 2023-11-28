@@ -1,9 +1,12 @@
+
 import Banner from "../Components/Banner";
 import FeaturedProducts from "../Components/FeaturedProducts";
 import TrendingProducts from "../Components/TrendingProducts";
 
 
+
 const Home = () => {
+    
     return (
         <div>
             <Banner></Banner>

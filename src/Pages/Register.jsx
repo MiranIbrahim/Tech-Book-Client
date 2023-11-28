@@ -17,6 +17,7 @@ const Register = () => {
     handleSubmit,
   } = useForm();
 
+  
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password).then((result) => {
@@ -27,6 +28,7 @@ const Register = () => {
           const newUser = {
             email: data.email,
             name: data.name,
+            role: 'unsubscribed',
           };
           axiosPublic.post("/users", newUser).then((res) => {
             if (res.data.insertedId) {
@@ -62,6 +64,7 @@ const Register = () => {
       const newUser = {
         email: user.email,
         name: user.displayName,
+        role: 'unsubscribed',
       }
       axiosPublic.post('/users', newUser)
       .then(res => {

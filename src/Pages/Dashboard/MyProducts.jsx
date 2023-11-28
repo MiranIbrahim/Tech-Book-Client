@@ -17,6 +17,7 @@ const MyProducts = () => {
     return <progress className="progress w-56"></progress>;
   }
   const myProducts = products.filter((item) => item.owner_email === user.email);
+  console.log(myProducts);
 
   const handleDelete = (item) => {
     Swal.fire({

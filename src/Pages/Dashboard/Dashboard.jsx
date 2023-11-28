@@ -10,9 +10,9 @@ import { IoStatsChart } from "react-icons/io5";
 import { RiCoupon3Line } from "react-icons/ri";
 
 const Dashboard = () => {
-  const isAdmin = false;
+  const isAdmin = true;
   const isModerator = false;
-  const isUser = true;
+  const isUser = false;
 
   return (
     <div className="flex flex-col md:flex-row">
