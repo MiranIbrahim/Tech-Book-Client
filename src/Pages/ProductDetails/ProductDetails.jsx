@@ -7,11 +7,11 @@ import { useContext } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { AuthContext } from "../../Providers/AuthProvider";
-import LoadingCircle from "../../Components/LoadingCircle";
+
 import useProducts from "../../Hooks/useProducts";
 
 const ProductDetails = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const product = useLoaderData();
 
   const axiosSecure = useAxiosSecure();
@@ -24,32 +24,26 @@ const ProductDetails = () => {
     (item) => item === user?.email
   )[0];
   console.log(myEmail);
-
-  // useEffect(() => {
-  //   const reportedStatus = localStorage.getItem(`reported_${product._id}`);
-  //   setIsReported(reportedStatus === "true");
-  // }, [product._id]);
-
-  const handleReport = async (id) => {
+  const handleReport = async (id, name) => {
     const reportItem = {
       product_id: id,
+      product_name: name,
       user_email: user.email,
     };
 
     const result = await axiosSecure.post("/reports", reportItem);
-    console.log("ekhane");
     console.log(result.data);
-    if (result.data.insertedId) {
-      toast("Good Job!", {
+    if (result.data.insertedId || result.data.modifiedCount) {
+      toast('Reported !', {
         icon: <FaFlag></FaFlag>,
       });
       refetch();
     }
   };
 
-  if (loading) {
-    return <LoadingCircle></LoadingCircle>;
-  }
+  // if (loading) {
+  //   return <LoadingCircle></LoadingCircle>;
+  // }
 
   return (
     <div className="py-10">
@@ -95,9 +89,11 @@ const ProductDetails = () => {
           </div>
           <div>
             <button
-              onClick={() => handleReport(product._id)}
-              className={`btn btn-sm btn-warning ${myEmail && "disabled"}`}
-              disabled={myEmail || (!user)}
+              onClick={() => handleReport(product._id, product.productName)}
+              className={`btn btn-sm btn-warning ${
+                (myEmail || !user) && "disabled"
+              }`}
+              disabled={myEmail || !user}
             >
               Report <FaFlag></FaFlag>
             </button>
