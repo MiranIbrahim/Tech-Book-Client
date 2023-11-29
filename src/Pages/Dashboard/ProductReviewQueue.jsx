@@ -47,8 +47,8 @@ const ProductReviewQueue = () => {
     <div>
       <h2 className="text-3xl text-center font-semibold">Product Queue</h2>
       <div className="overflow-x-auto">
-        <table className="table table-md">
-          <thead className="text-center">
+        <table className="table table-md text-center">
+          <thead className="">
             <tr>
               <th>#</th>
               <th>Product Name</th>
@@ -129,12 +129,12 @@ const ProductReviewQueue = () => {
           </tbody>
           <tfoot>
             <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>company</th>
-              <th>location</th>
-              <th>Last Login</th>
+            <th>#</th>
+              <th>Product Name</th>
+              <th>Product Details</th>
+              <th>Featured?</th>
+              <th>Status</th>
+              <th>Reject</th>
             </tr>
           </tfoot>
         </table>
