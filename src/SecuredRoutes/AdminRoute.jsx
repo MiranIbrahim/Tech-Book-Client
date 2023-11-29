@@ -3,6 +3,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import useAxiosSecure from "../Hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import LoadingCircle from "../Components/LoadingCircle";
 
 const useAdmin = () => {
   const { user } = useContext(AuthContext);
@@ -24,7 +25,7 @@ const AdminRoute = ({ children }) => {
   const [isAdmin, isLoading] = useAdmin();
   const location = useLocation();
   if (loading || isLoading)
-    return <progress className="progress w-56"></progress>;
+    return <LoadingCircle></LoadingCircle>;
 
   if (user && isAdmin) {
     return children;

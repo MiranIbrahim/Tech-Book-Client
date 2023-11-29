@@ -3,8 +3,9 @@ import { AuthContext } from "../Providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import useAxiosSecure from "../Hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import LoadingCircle from "../Components/LoadingCircle";
 
-const useAdmin = () => {
+const useModerator = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const { data: isModerator, isPending: isLoading } = useQuery({
@@ -12,7 +13,7 @@ const useAdmin = () => {
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/moderator/${user.email}`);
       console.log(res.data);
-      return res.data?.admin;
+      return res.data?.moderator;
     },
   });
   return [isModerator, isLoading];
@@ -21,10 +22,10 @@ const useAdmin = () => {
 // eslint-disable-next-line react/prop-types
 const ModeratorRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [isModerator, isLoading] = useAdmin();
+  const [isModerator, isLoading] = useModerator();
   const location = useLocation();
   if (loading || isLoading)
-    return <progress className="progress w-56"></progress>;
+    return <LoadingCircle></LoadingCircle>;
 
   if (user && isModerator) {
     return children;

@@ -40,11 +40,17 @@ const ProductDetails = () => {
       refetch();
     }
   };
-
-  // if (loading) {
-  //   return <LoadingCircle></LoadingCircle>;
-  // }
-
+  const handleUpvote = async(id) => {
+    const voteItem = {
+      product_id: id,
+      user_email: user?.email,
+    }
+    const result = await axiosSecure.post("/likes", voteItem);
+    console.log(result.data);
+    // if (result.data.insertedId || result.data.modifiedCount) {
+    //   refetch();
+    // }
+  }
   return (
     <div className="py-10">
       <h2 className="my-10 text-3xl text-center ">Product Details</h2>
@@ -82,7 +88,7 @@ const ProductDetails = () => {
           <p className="font-bold">Details: {product.description}</p>
 
           <div className="pb-2 text-lg flex items-center gap-3">
-            <button className="text-lg">
+            <button onClick={()=> handleUpvote (product._id)} className="text-lg">
               <GrLike></GrLike>
             </button>{" "}
             <p>{product.upvoteCount} </p>
