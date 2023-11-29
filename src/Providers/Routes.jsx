@@ -16,83 +16,107 @@ import AddProduct from "../Pages/Dashboard/AddProduct";
 import MyProducts from "../Pages/Dashboard/MyProducts";
 import UpdateProducts from "../Pages/Dashboard/UpdateProducts";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
+import AdminRoute from "../SecuredRoutes/AdminRoute";
+import ModeratorRoute from "../SecuredRoutes/ModeratorRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
     children: [
-        {
-            path: '/',
-            element: <Home></Home>,
-        },
-        {
-            path: '/products',
-            element: <Products></Products>,
-        },
-        {
-            path: '/login',
-            element: <Login></Login>,
-        },
-        {
-            path: '/register',
-            element: <Register></Register>,
-        },
-        {
-            path: '/productDetails/:id',
-            element: <ProductDetails></ProductDetails>,
-            loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
-        },
-        {
-            path: '*',
-            element: <NotFound></NotFound>,
-        },
-    ]
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/products",
+        element: <Products></Products>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/productDetails/:id",
+        element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>,
+      },
+    ],
   },
   {
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
-    //   Admin routes 
-    {
-        path: '/dashboard/statistics',
-        element: <Statistics></Statistics>
-    },
-    {
-        path: '/dashboard/manageUsers',
-        element: <ManageUsers></ManageUsers>
-    },
-    {
-        path: '/dashboard/manageCoupons',
-        element: <ManageCoupons></ManageCoupons>
-    },
-    // Moderator routes
-    {
-        path: '/dashboard/productReviewQueue',
-        element: <ProductReviewQueue></ProductReviewQueue>
-    },
-    {
-        path: '/dashboard/reportedContents',
-        element: <ReportedContents></ReportedContents>
-    },
-    // User Routes
-    {
-        path: '/dashboard/userProfile',
-        element: <UserProfile></UserProfile>
-    },
-    {
-        path: '/dashboard/addProduct',
-        element: <AddProduct></AddProduct>
-    },
-    {
-        path: '/dashboard/myProduct',
-        element: <MyProducts></MyProducts>
-    },
-    {
-        path: '/dashboard/updateProduct/:id',
+      //   Admin routes
+      {
+        path: "/dashboard/statistics",
+        element: (
+          <AdminRoute>
+            <Statistics></Statistics>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageUsers",
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageCoupons",
+        element: (
+          <AdminRoute>
+            <ManageCoupons></ManageCoupons>
+          </AdminRoute>
+        ),
+      },
+      // Moderator routes
+      {
+        path: "/dashboard/productReviewQueue",
+        element: (
+          <ModeratorRoute>
+            <ProductReviewQueue></ProductReviewQueue>,
+          </ModeratorRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reportedContents",
+        element: (
+          <ModeratorRoute>
+            <ReportedContents></ReportedContents>,
+          </ModeratorRoute>
+        ),
+      },
+      // User Routes
+      {
+        path: "/dashboard/userProfile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "/dashboard/addProduct",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/dashboard/myProduct",
+        element: <MyProducts></MyProducts>,
+      },
+      {
+        path: "/dashboard/updateProduct/:id",
         element: <UpdateProducts></UpdateProducts>,
-        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
-    },
-    ]
-}
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
+      },
+    ],
+  },
 ]);

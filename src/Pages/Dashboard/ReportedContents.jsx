@@ -20,7 +20,7 @@ const ReportedContents = () => {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          axiosSecure.delete(`/reports/${item.product_id}`).then((res) => {
+          axiosSecure.delete(`/reports/moderator/${item.product_id}`).then((res) => {
             console.log(res.data);
             
             if (res.data.productResult.deletedCount > 0 && res.data.reportResult.deletedCount > 0) {

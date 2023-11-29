@@ -29,7 +29,7 @@ const ManageUsers = () => {
         const userRole = {
           role,
         };
-        const res = await axiosSecure.patch(`/users/${user._id}`, userRole);
+        const res = await axiosSecure.patch(`/users/admin/${user._id}`, userRole);
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
           Swal.fire({

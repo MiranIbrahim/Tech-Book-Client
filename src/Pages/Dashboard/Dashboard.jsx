@@ -27,8 +27,8 @@ const Dashboard = () => {
       key: 'userRole',
     });
   console.log(dbUser.role);
-  const role = 'moderator';
-  // const role = dbUser.role;
+  // const role = 'moderator';
+  const role = dbUser.role;
 
   return (
     <div className="flex flex-col md:flex-row">
