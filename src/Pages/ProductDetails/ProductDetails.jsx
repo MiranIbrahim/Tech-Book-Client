@@ -1,56 +1,78 @@
 import { GrLike } from "react-icons/gr";
 import { useLoaderData } from "react-router-dom";
-
 import { FaFlag } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
-import toast from "react-hot-toast";
-import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { AuthContext } from "../../Providers/AuthProvider";
-
-import useProducts from "../../Hooks/useProducts";
+import useAxiosPublic from "../../Hooks/UseAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const { user } = useContext(AuthContext);
   const product = useLoaderData();
-
   const axiosSecure = useAxiosSecure();
-  const api = `/reports/${product._id}`;
-  const key = "report";
-  const [report, , refetch] = useProducts({ api, key });
-  console.log(report);
+  const axiosPublic = useAxiosPublic();
+  const [presentVote, setPresentVote] = useState(product.upvoteCount);
 
-  const myEmail = report?.user_emails?.filter(
-    (item) => item === user?.email
-  )[0];
-  console.log(myEmail);
+  // ---------------for report-------------------
+  const { data: report = [], refetch: reportRefetch } = useQuery({
+    queryKey: ["reports", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/reports/${product._id}`);
+      return res.data;
+    },
+  });
+  const reportedEmail = report?.user_emails?.includes(user?.email);
+
   const handleReport = async (id, name) => {
     const reportItem = {
       product_id: id,
       product_name: name,
       user_email: user.email,
     };
-
     const result = await axiosSecure.post("/reports", reportItem);
-    console.log(result.data);
-    if (result.data.insertedId || result.data.modifiedCount) {
-      toast('Reported !', {
+    // console.log(result.data);
+    if (result.data.insertedId > 0 || result.data.modifiedCount > 0) {
+      toast("Reported !", {
         icon: <FaFlag></FaFlag>,
       });
-      refetch();
+      reportRefetch();
     }
   };
-  const handleUpvote = async(id) => {
+
+  // ---------------for UpVote-------------------
+
+  const { data: like = [], refetch: likeRefetch } = useQuery({
+    queryKey: ["like", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/likes/${product._id}`);
+      return res.data;
+    },
+  });
+
+  const likedEmail = like?.user_emails?.includes(user?.email);
+  // console.log(likedEmail)
+  const handleUpVote = async (id) => {
     const voteItem = {
       product_id: id,
       user_email: user?.email,
-    }
+    };
     const result = await axiosSecure.post("/likes", voteItem);
-    console.log(result.data);
-    // if (result.data.insertedId || result.data.modifiedCount) {
-    //   refetch();
-    // }
-  }
+    // console.log("prodRes", result.data.productResult);
+    // console.log("likeRes", result.data.likeResult);
+    if (
+      result.data.productResult &&
+      result.data.productResult.modifiedCount > 0 &&
+      (result.data.likeResult?.insertedId > 0 ||
+        result.data.likeResult?.modifiedCount > 0)
+    ) {
+      setPresentVote(presentVote + 1);
+      likeRefetch();
+    }
+  };
+
   return (
     <div className="py-10">
       <h2 className="my-10 text-3xl text-center ">Product Details</h2>
@@ -88,23 +110,28 @@ const ProductDetails = () => {
           <p className="font-bold">Details: {product.description}</p>
 
           <div className="pb-2 text-lg flex items-center gap-3">
-            <button onClick={()=> handleUpvote (product._id)} className="text-lg">
+            <button
+              onClick={() => handleUpVote(product._id)}
+              className={`btn btn-sm text-blue-600 font-extrabold
+              ${(likedEmail || !user) && "disabled"}
+              `}
+              disabled={likedEmail || !user}
+            >
               <GrLike></GrLike>
             </button>{" "}
-            <p>{product.upvoteCount} </p>
+            <p>{presentVote} </p>
           </div>
           <div>
             <button
               onClick={() => handleReport(product._id, product.productName)}
-              className={`btn btn-sm btn-warning ${
-                (myEmail || !user) && "disabled"
-              }`}
-              disabled={myEmail || !user}
+              className={`btn btn-sm btn-warning 
+              ${(reportedEmail || !user) && "disabled"}`}
+              disabled={reportedEmail || !user}
             >
               Report <FaFlag></FaFlag>
             </button>
           </div>
-          <div></div>
+          
         </div>
       </div>
     </div>
@@ -153,3 +180,29 @@ export default ProductDetails;
   ))}
 </Swiper>; */
 }
+
+// // for like
+// const likeApi = `/likes/${product._id}`;
+// const likeKey = "like";
+// const [like, , refetch] = useProducts({ likeApi, likeKey });
+// console.log(like);
+// const likedEmail = like?.user_emails?.includes(user?.email);
+// console.log(likedEmail);
+
+// const handleUpVote = async (id) => {
+//   const voteItem = {
+//     product_id: id,
+//     user_email: user?.email,
+//   };
+//   const result = await axiosSecure.post("/likes", voteItem);
+//   console.log(result.data);
+
+//   if (
+//     result.data.productResult &&
+//     result.data.productResult.modifiedCount > 0 &&
+//     (result.data.likeResult?.insertedId > 0 ||
+//       result.data.likeResult?.modifiedCount > 0)
+//   ) {
+//     refetch();
+//   }
+// };

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./UseAxiosPublic";
 
 const useProducts = ({ api, key }) => {
+  
   const axiosPublic = useAxiosPublic();
   const {
     data: products = [],
