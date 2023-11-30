@@ -8,6 +8,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import LoadingCircle from "../../Components/LoadingCircle";
 const image_api_key = import.meta.env.VITE_IMAGE_BB_API_KEY;
 const image_bb_api_url = `https://api.imgbb.com/1/upload?key=${image_api_key}`;
 
@@ -21,7 +22,7 @@ const AddProduct = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedLinks, setSelectedLinks] = useState([]);
   if (loading) {
-    return <progress className="progress w-56"></progress>;
+    return <LoadingCircle></LoadingCircle>;
   }
   const onSubmit = async (formData) => {
     const data = {
@@ -216,3 +217,10 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
+// {
+//   "couponCode": "SAVE20",
+//   "expiryDate": "2023-12-31",
+//   "description": "Save 20% on your purchase",
+//   "discountAmount": 20
+// },

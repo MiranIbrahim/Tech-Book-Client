@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
-import useAxiosSecure from "../Hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingCircle from "../Components/LoadingCircle";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
-const useAdmin = () => {
+export const useAdmin = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const { data: isAdmin, isPending: isLoading } = useQuery({

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavLogo from "../assets/Icon/NavLogo.png";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { useContext } from "react";
@@ -6,9 +6,12 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        navigate("/login");
+      })
       .catch((error) => console.log(error));
   };
   const navItems = (
@@ -62,18 +65,13 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src={user.photoURL}
-                />
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
               </div>
             </div>
             <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content  rounded-box w-52 text-slate-600 bg-base-200">
-              <li className="text-center text-blue-600">
-                {user.displayName}
-              </li>
+              <li className="text-center text-blue-600">{user.displayName}</li>
               <li>
-              <Link to='/dashboard/userProfile'>Dashboard</Link>
+                <Link to="/dashboard/userProfile">Dashboard</Link>
               </li>
               <li>
                 <button onClick={handleLogOut} className="">

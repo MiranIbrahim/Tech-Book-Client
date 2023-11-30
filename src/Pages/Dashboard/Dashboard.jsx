@@ -1,7 +1,7 @@
-import { FaBoxOpen, FaHome, FaUser, FaUsers } from "react-icons/fa";
+import { FaBoxOpen, FaHome, FaSignOutAlt, FaUser, FaUsers } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import { FaFolderPlus } from "react-icons/fa6";
 import { MdOutlineReviews } from "react-icons/md";
@@ -15,7 +15,8 @@ import LoadingCircle from "../../Components/LoadingCircle";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Dashboard = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [role, setRole] = useState("");
   const axiosSecure = useAxiosSecure();
   if (loading) {
@@ -27,6 +28,14 @@ const Dashboard = () => {
     }
   });
   console.log(role);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -98,7 +107,7 @@ const Dashboard = () => {
               </li>
             </>
           )}
-
+          {/* --------------------------Common Routes------------------------- */}
           <div className="divider"></div>
           <li>
             <NavLink to="/">
@@ -111,6 +120,12 @@ const Dashboard = () => {
               <FiMenu></FiMenu>
               All Products
             </NavLink>
+          </li>
+          <li>
+            <button onClick={handleLogOut} className="">
+              <FaSignOutAlt></FaSignOutAlt>
+              LogOut
+            </button>
           </li>
         </ul>
       </div>
