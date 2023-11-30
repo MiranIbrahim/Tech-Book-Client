@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { TagsInput } from "react-tag-input-component";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/UseAxiosPublic";
-import useAxiosSecure from "../../Hooks/UseAxiosSecure";
+
 
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const image_api_key = import.meta.env.VITE_IMAGE_BB_API_KEY;
 const image_bb_api_url = `https://api.imgbb.com/1/upload?key=${image_api_key}`;
 

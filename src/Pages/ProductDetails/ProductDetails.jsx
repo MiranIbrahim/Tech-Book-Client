@@ -60,16 +60,18 @@ const ProductDetails = () => {
       user_email: user?.email,
     };
     const result = await axiosSecure.post("/likes", voteItem);
-    // console.log("prodRes", result.data.productResult);
-    // console.log("likeRes", result.data.likeResult);
+    console.log("prodRes", result.data.productResult);
+    console.log("likeRes", result.data.likeResult);
     if (
-      result.data.productResult &&
-      result.data.productResult.modifiedCount > 0 &&
+      result.data.productResult.modifiedCount > 0 ||
       (result.data.likeResult?.insertedId > 0 ||
         result.data.likeResult?.modifiedCount > 0)
     ) {
+      console.log("age");
       setPresentVote(presentVote + 1);
+      console.log("moddhe");
       likeRefetch();
+      console.log("pore");
     }
   };
 

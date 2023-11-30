@@ -8,27 +8,25 @@ import { MdOutlineReviews } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { IoStatsChart } from "react-icons/io5";
 import { RiCoupon3Line } from "react-icons/ri";
-import useProducts from "../../Hooks/useProducts";
-import { useContext } from "react";
+// import useProducts from "../../Hooks/useProducts";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import LoadingCircle from "../../Components/LoadingCircle";
-
-
-
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
-  if(!user){
-    return (<LoadingCircle></LoadingCircle>);
+  const { user, loading } = useContext(AuthContext);
+  const [role, setRole] = useState("");
+  const axiosSecure = useAxiosSecure();
+  if (loading) {
+    return <LoadingCircle></LoadingCircle>;
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [dbUser] = useProducts({
-      api: `/users/${user?.email}`,
-      key: 'userRole',
-    });
-  console.log(dbUser.role);
-  // const role = 'moderator';
-  const role = dbUser.role;
+  axiosSecure.get(`/users/${user?.email}`).then((res) => {
+    if (res.data.role) {
+      setRole(res.data.role);
+    }
+  });
+  console.log(role);
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -36,7 +34,7 @@ const Dashboard = () => {
       <div className="w-full md:w-1/4 md:min-h-screen bg-blue-300 font-semibold">
         <ul className="menu p-4 text-lg">
           {/* ------------------User routes ----------------- */}
-          {(role === 'subscribed' || role === 'unsubscribed') && (
+          {(role === "subscribed" || role === "unsubscribed") && (
             <>
               <li className="">
                 <NavLink to="/dashboard/userProfile">
@@ -59,9 +57,8 @@ const Dashboard = () => {
             </>
           )}
 
-
           {/* ------------------Admin routes ----------------- */}
-          {role === 'admin' && (
+          {role === "admin" && (
             <>
               <li className="">
                 <NavLink to="/dashboard/statistics">
@@ -84,9 +81,8 @@ const Dashboard = () => {
             </>
           )}
 
-
           {/* ------------------Moderator routes ----------------- */}
-          {role === 'moderator' && (
+          {role === "moderator" && (
             <>
               <li className="">
                 <NavLink to="/dashboard/productReviewQueue">

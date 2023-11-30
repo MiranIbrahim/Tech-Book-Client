@@ -18,6 +18,7 @@ import UpdateProducts from "../Pages/Dashboard/UpdateProducts";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import AdminRoute from "../SecuredRoutes/AdminRoute";
 import ModeratorRoute from "../SecuredRoutes/ModeratorRoute";
+import Payment from "../Pages/Dashboard/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myProduct",
         element: <MyProducts></MyProducts>,
+      },
+      {
+        path: "/dashboard/payment",
+        element: <Payment></Payment>,
       },
       {
         path: "/dashboard/updateProduct/:id",

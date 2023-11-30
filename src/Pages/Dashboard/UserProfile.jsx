@@ -1,13 +1,24 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { MdOutlineVerified } from "react-icons/md";
+import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import LoadingCircle from "../../Components/LoadingCircle";
 
 const UserProfile = () => {
   const { user, loading } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   if (loading) {
-    return <progress className="progress w-56"></progress>;
+    return <LoadingCircle></LoadingCircle>;
   }
-  const isSubscribed = false;
+  let isSubscribed = true;
+  axiosSecure.get(`/users/${user?.email}`)
+  .then(res => {
+    if(res.data.role==='unsubscribed'){
+      isSubscribed = false;
+    }
+  })
+  
   return (
     <div>
       <h2 className="text-3xl text-center font-semibold">My Profile</h2>
@@ -31,7 +42,11 @@ const UserProfile = () => {
             </div>
           ) : (
             <>
-              <button className="btn btn-primary">pay $20 to subscribe </button>
+              <Link to='/dashboard/payment'>
+                <button className="btn btn-primary">
+                  pay $20 to subscribe{" "}
+                </button>
+              </Link>
             </>
           )}
         </div>

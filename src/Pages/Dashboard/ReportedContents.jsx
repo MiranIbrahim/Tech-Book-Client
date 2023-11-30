@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import useProducts from "../../Hooks/useProducts";
-import useAxiosSecure from "../../Hooks/UseAxiosSecure";
+
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const ReportedContents = () => {
   const api = "/reports";
