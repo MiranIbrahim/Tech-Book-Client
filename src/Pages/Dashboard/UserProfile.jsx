@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { MdOutlineVerified } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -6,19 +6,20 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import LoadingCircle from "../../Components/LoadingCircle";
 
 const UserProfile = () => {
+  const [isSubscribed, setIsSubscribed] = useState(true);
   const { user, loading } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   if (loading) {
     return <LoadingCircle></LoadingCircle>;
   }
-  let isSubscribed = true;
+  
   axiosSecure.get(`/users/${user?.email}`)
   .then(res => {
     if(res.data.role==='unsubscribed'){
-      isSubscribed = false;
+      setIsSubscribed(false);
     }
   })
-  
+  console.log(isSubscribed)
   return (
     <div>
       <h2 className="text-3xl text-center font-semibold">My Profile</h2>

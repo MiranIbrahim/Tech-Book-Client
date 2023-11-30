@@ -17,7 +17,7 @@ const CheckoutForm = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   //   const [cart, refetch] = useCart();
-  const totalPrice = 20;
+  const [totalPrice , setTotalPrice] = useState(20);
   //   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
@@ -103,8 +103,29 @@ const CheckoutForm = () => {
       }
     }
   };
+
+  const handleCoupon = async(e) => {
+    e.preventDefault();
+    const couponCode = e.target.coupon.value;
+    console.log(couponCode);
+    const couponSend = await axiosSecure.get(`/coupons/${couponCode}`);
+    if(couponSend.data){
+      const discount = parseFloat(couponSend.data.discountAmount);
+      setTotalPrice(totalPrice-discount);
+      e.target.reset();
+      console.log(totalPrice);
+    }
+  }
   return (
     <div>
+      <form onSubmit={handleCoupon} className=" my-10 w-2/5 ">
+        <input type="text"
+        name="coupon"
+        className="p-3"
+        placeholder="Have any Coupon?"
+         />
+         <button type="submit" className="btn btn-warning ml-4">Check Coupon </button>
+      </form>
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
