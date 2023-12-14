@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         path: "/productDetails/:id",
         element: <ProductDetails></ProductDetails>,
         loader: ({ params }) =>
-          fetch(`https://tech-book-server-iota.vercel.app/products/${params.id}`),
+          fetch(`http://localhost:5000/products/${params.id}`),
       },
       {
         path: "*",
@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/updateProduct/:id",
         element: <UpdateProducts></UpdateProducts>,
         loader: ({ params }) =>
-          fetch(`https://tech-book-server-iota.vercel.app/products/${params.id}`),
+          fetch(`http://localhost:5000/products/${params.id}`),
       },
     ],
   },

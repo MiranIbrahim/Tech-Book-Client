@@ -1,6 +1,7 @@
-import { useAdmin } from "../../SecuredRoutes/AdminRoute";
+import PropTypes from "prop-types";
+import useAdmin from "../../Hooks/useAdmin";
 
-const CouponCard = ({ item }) => {
+const CouponCard = ({ item, handleDelete }) => {
   const [isAdmin] = useAdmin();
 
   return (
@@ -25,11 +26,29 @@ const CouponCard = ({ item }) => {
           </p>
         </div>
         <div className="card-actions justify-end">
-          {isAdmin && <button className="btn btn-warning">Delete</button>}
+          {isAdmin && (
+            <button
+              onClick={() => handleDelete(item._id)}
+              className="btn btn-warning"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+CouponCard.propTypes = {
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    couponCode: PropTypes.string.isRequired,
+    expiryDate: PropTypes.string.isRequired,
+    discountAmount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default CouponCard;

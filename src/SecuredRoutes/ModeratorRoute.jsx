@@ -1,19 +1,23 @@
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
-import useAxiosSecure from "../Hooks/UseAxiosSecure";
+
 import { useQuery } from "@tanstack/react-query";
 import LoadingCircle from "../Components/LoadingCircle";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const useModerator = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const { data: isModerator, isPending: isLoading } = useQuery({
+  const { data: isModerator, isLoading } = useQuery({
     queryKey: [user?.email, "isModerator"],
+    enabled: !loading && !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users/moderator/${user.email}`);
-      console.log(res.data);
-      return res.data?.moderator;
+      if (user?.email) {
+        const res = await axiosSecure.get(`/users/moderator/${user.email}`);
+        console.log(res.data);
+        return res.data?.moderator;
+      }
     },
   });
   return [isModerator, isLoading];
@@ -24,8 +28,7 @@ const ModeratorRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const [isModerator, isLoading] = useModerator();
   const location = useLocation();
-  if (loading || isLoading)
-    return <LoadingCircle></LoadingCircle>;
+  if (loading || isLoading) return <LoadingCircle></LoadingCircle>;
 
   if (user && isModerator) {
     return children;

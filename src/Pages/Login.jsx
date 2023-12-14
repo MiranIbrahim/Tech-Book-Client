@@ -32,34 +32,7 @@ const Login = () => {
           
         });
       });
-    // signIn(email, password)
-    //   .then((res) => {
-    //     const user = res.user;
-    //     console.log(user);
-    //     Swal.fire({
-    //       title: "Login Successful",
-    //       showClass: {
-    //         popup: `
-    //         animate__animated
-    //         animate__fadeInUp
-    //         animate__faster
-    //       `,
-    //       },
-    //       hideClass: {
-    //         popup: `
-    //         animate__animated
-    //         animate__fadeOutDown
-    //         animate__faster
-    //       `,
-    //       },
-    //     });
 
-    //   })
-    //   .catch((err) => {
-    //     if(err){
-    //       toast.error("Wrong Email/Password");
-    //     }
-    //   });
   };
   return (
     <div className="flex h-screen justify-center items-center bg-gradient-to-r from-blue-400 via-black-200 via-blue-300 to-blue-500">

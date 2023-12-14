@@ -12,7 +12,6 @@ import {
 import { app } from "../Firebase/firebase.config";
 import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
-
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
@@ -58,8 +57,10 @@ const AuthProvider = ({ children }) => {
         const userInfo = {
           email: currentUser.email,
         };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
+        axiosPublic.post("/jwt", userInfo)
+        .then((res) => {
           if (res.data.token) {
+            console.log(res.data.token);
             localStorage.setItem("access-token", res.data.token);
             setLoading(false);
           }

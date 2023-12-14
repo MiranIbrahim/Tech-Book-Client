@@ -13,10 +13,6 @@ const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
   const { loading } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
-  //   axiosSecure.get("/coupons").then((res) => {
-  //     console.log(res.data);
-  //     setCoupons(res.data);
-  //   });
 
   const fetchCoupons = useCallback(async () => {
     try {
@@ -27,6 +23,7 @@ const ManageCoupons = () => {
       console.error("Error fetching coupons:", error);
     }
   }, [axiosSecure]);
+  
   useEffect(() => {
     fetchCoupons();
   }, [fetchCoupons]);
@@ -55,6 +52,31 @@ const ManageCoupons = () => {
       reset();
       fetchCoupons();
     }
+  };
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/coupons/${id}`);
+        if (res.data.deletedCount > 0) {
+          console.log("kjnfs");
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          fetchCoupons();
+        }
+      }
+    });
   };
   return (
     <div className="max-w-full w-11/12 mx-auto">
@@ -122,8 +144,14 @@ const ManageCoupons = () => {
         </form>
       </div>
       <div>
-        <h2 className="text-3xl mt-10 text-center font-semibold">---------------All Coupons----------------</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-10">{coupons.map(item => <CouponCard key={item._id} item={item} ></CouponCard> )}</div>
+        <h2 className="text-3xl mt-10 text-center font-semibold">
+          ---------------All Coupons----------------
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-10">
+          {coupons.map((item) => (
+            <CouponCard key={item._id} item={item} handleDelete={handleDelete}></CouponCard>
+          ))}
+        </div>
       </div>
     </div>
   );

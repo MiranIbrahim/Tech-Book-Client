@@ -15,6 +15,7 @@ const UserProfile = () => {
   
   axiosSecure.get(`/users/${user?.email}`)
   .then(res => {
+    // console.log(res.data.role);
     if(res.data.role==='unsubscribed'){
       setIsSubscribed(false);
     }

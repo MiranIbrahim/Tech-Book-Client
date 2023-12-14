@@ -6,9 +6,7 @@ const TrendingProducts = () => {
   const api = "/trending-products";
   const key = "trending-products";
   const [products] = useProducts({ api, key });
-  const trendingProducts = products.filter(
-    (item) => item.status === "accepted" && item.featured == true
-  );
+  const trendingProducts = products;
   console.log(trendingProducts);
   return (
     <div className="my-10">
