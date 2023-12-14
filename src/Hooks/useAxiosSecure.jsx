@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
   // baseURL: "https://tech-book-server-iota.vercel.app",
-  baseURL: "http://localhost:5000",
+  baseURL: "https://tech-book-server-iota.vercel.app",
   
 });
 
